@@ -1,5 +1,22 @@
-<script>
+<script lang='ts'>
+	import { invalidateAll } from '$app/navigation';
+	import { supabaseClient } from '$lib/supabase';
+	import { onMount } from 'svelte';
   import '../app.css'
+
+  onMount(() => {
+    console.log("I was mounted")
+    const { data: {subscription}} = supabaseClient.auth.onAuthStateChange(() => {
+      console.info('Auth InvalidateAll')
+      // https://kit.svelte.dev/docs/modules#$app-navigation
+      invalidateAll() // this will monitor the changes in supabase authentication url
+    })
+
+    return () => {
+      // on cleanup, unsubscribe from supabase client
+      subscription.unsubscribe()
+    }
+  })
 </script>
 
 <div class="navbar bg-primary text-primary-content">
