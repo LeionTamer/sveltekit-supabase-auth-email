@@ -1,4 +1,6 @@
 <script lang="ts">
+	import {title} from '@stores/titleStore'
+	title.setTitle('Login')
 </script>
 
 <main>

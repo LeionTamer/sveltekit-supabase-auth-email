@@ -3,6 +3,7 @@
 	import { supabaseClient } from '$lib/supabase';
 	import { onMount } from 'svelte';
   import '../app.css'
+  import {title} from '@stores/titleStore'
 
   onMount(() => {
     console.log("I was mounted")
@@ -19,6 +20,9 @@
   })
 </script>
 
+<svelte:head>
+  <title>{$title}</title>
+</svelte:head>
 <div class="navbar bg-primary text-primary-content">
   <div class="flex-1">
     <a href='/' class="btn btn-ghost normal-case text-xl">daisyUI</a>
